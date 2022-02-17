@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 142-nginx-deployment
+  labels:
+    app: 142-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 142-nginx
+  template:
+    metadata:
+      labels:
+        app: 142-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 172.1.14.168:5001/nginx
+  imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+
+Command to deploy:
+	kubectl apply -f dep.yaml
+
+Command to expose
+  kubectl expose deployment 142-nginx-deployment --type=NodePort --name=142-nginx-service
+
+Command to update image:
+ 	kubectl set image deployment/142-nginx-deployment nginx=newImage
+
+To check the updated name:
+  kubectl describe deploy 142-nginx-deployment | grep Image:
+

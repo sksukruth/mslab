@@ -1,0 +1,6 @@
+kubectl run 142-nginx1 --image=nginx --restart=Never --labels=app=142-v1
+kubectl run 142-nginx2 --image=nginx --restart=Never --labels=app=142-v1
+kubectl run 142-nginx3 --image=nginx --restart=Never --labels=app=142-v1
+kubectl get po --show-labels 
+kubectl get po -l app=142-v2
+kubectl label po nginx1 nginx2 nginx3 app-
